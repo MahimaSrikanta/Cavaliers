@@ -1,5 +1,5 @@
 function user (state=[], action) {
-    console.log(state, action);
+    console.log('from user Reducer', state, action);
     return state;
 }
 
