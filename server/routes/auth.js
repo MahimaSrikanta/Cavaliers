@@ -10,7 +10,10 @@ router.route('/')
 
 router.route('/login')
   .get((req, res) => {
-      res.render('login.ejs', { message: req.flash('loginMessage') });
+    
+      //res.render('login.ejs', { message: req.flash('loginMessage') });
+            console.log('I am here from signup');
+      res.send({'success': true, 'message':req.user});
   })
   .post(middleware.passport.authenticate('local-login', {
       successRedirect: '/profile',
@@ -21,6 +24,7 @@ router.route('/login')
 router.route('/signup')
   .get((req, res) => {
       res.render('signup.ejs', { message: req.flash('signupMessage') });
+
   })
   .post(middleware.passport.authenticate('local-signup', {
       successRedirect: '/profile',
@@ -30,9 +34,11 @@ router.route('/signup')
 
 router.route('/profile')
   .get(middleware.auth.verify, (req, res) => {
-      res.render('profile.ejs', {
-          user: req.user // get the user out of session and pass to template
-      });
+    //   res.render('profile.ejs', {
+    //       user: req.user // get the user out of session and pass to template
+    //   });
+      console.log('I am here');
+      res.send({'success': true, 'message':req.user});
   });
 
 router.route('/logout')
@@ -66,5 +72,11 @@ router.get('/auth/twitter/callback', middleware.passport.authenticate('twitter',
     successRedirect: '/profile',
     failureRedirect: '/login'
 }));
+
+router.post('/mobile', (req, res)=>{
+    console.log(req.body.username);
+    console.log(req.body.password);
+    res.send();
+});
 
 module.exports = router;
