@@ -15,14 +15,13 @@ export default class Login extends Component {
         super(props);
         this.state={
             username: '',
-            password: '',
-            text:'',
+            password: '',      
         };
 
         this._login = this._login.bind(this);
     }
     _login() {
-        fetch('http://127.0.0.1:3000/login', {
+        fetch('http://127.0.0.1:3000/mobile', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -34,13 +33,25 @@ export default class Login extends Component {
             })
         })
         .then((response) => {
-            console.log(response.json());
-            return response.json();
+            return (response.json());          
         })
         .then((res) => {
+         
+            if(res.success === true) {
+                let username = res.message;
+                AsyncStorage.setItem('username', username);
+                //navigato to profileScreen 
+                console.log(this.props.navigator)         
+                this.props.navigator.push({
+                    id: 'Profile'
+                });
+            } else {
+                alert('no user found');
+            }
         })
         .catch((err)=> {
             alert(err);
+            
         });
     }
     render() {
