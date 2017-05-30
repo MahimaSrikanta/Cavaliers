@@ -8,6 +8,7 @@ import {
   AsyncStorage,
   TextInput
 } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
 
 export default class Login extends Component {
@@ -40,11 +41,7 @@ export default class Login extends Component {
             if(res.success === true) {
                 let username = res.message;
                 AsyncStorage.setItem('username', username);
-                //navigato to profileScreen 
-                console.log(this.props.navigator)         
-                this.props.navigator.push({
-                    id: 'Profile'
-                });
+                this.props.navigation.navigate("Profile");
             } else {
                 alert('no user found');
             }
@@ -89,7 +86,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 30,
         flexGrow: 1,
-        backgroundColor: '#FF1744',
+        backgroundColor: '#1abc9c',
     },
     welcome: {
         textAlign: 'center',
@@ -101,7 +98,7 @@ const styles = StyleSheet.create({
         opacity:0.6
     },
     inputContainer: {
-        margin: 20,
+        margin: 30,
         marginBottom: 0,
         padding: 10,
         paddingBottom: 10,

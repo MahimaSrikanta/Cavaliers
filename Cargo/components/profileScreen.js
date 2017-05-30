@@ -35,10 +35,11 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
     container: {
         padding: 50,
+        backgroundColor: '#1abc9c',
     },
     input: {
         height:40,
-        backgroundColor: '#F8BBD0',
+       
         marginBottom: 20
     }
 });
